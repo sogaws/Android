@@ -5,3 +5,33 @@ def my_abs(x):
     else:
         return -x
 调用 print(my_abs(-99))
+
+2、如果你已经把my_abs()的函数定义保存为abstest.py文件了，那么，可以在该文件的当前目录下启动Python解释器，
+用from abstest import my_abs来导入my_abs()函数，注意abstest是文件名（不含.py扩展名）：
+>>> from abstest import my_abs                          
+>>> my_abs(-9)   
+
+3、空函数
+def nop():
+    pass
+pass语句什么都不做，那有什么用？实际上pass可以用来作为占位符，比如现在还没想好怎么写函数的代码，就可以先放一个pass，让代码能运行起来。
+
+让我们修改一下my_abs的定义，对参数类型做检查，只允许整数和浮点数类型的参数。数据类型检查可以用内置函数isinstance()实现：
+
+def my_abs(x):
+    if not isinstance(x, (int, float)):
+        raise TypeError('bad operand type')
+    if x >= 0:
+        return x
+    else:
+        return -x
+
+4、返回多个参数
+import math
+def move(x, y, step, angle=0):
+    nx = x + step * math.cos(angle)
+    ny = y - step * math.sin(angle)
+    return nx, ny
+结果：
+>>> x, y = move(100, 100, 60, math.pi / 6)
+>>> print(x, y)
